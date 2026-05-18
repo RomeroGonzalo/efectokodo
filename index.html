@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KODO — Growth Partner</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #09090f;
+      --bg2:      #0f0f1a;
+      --bg3:      #141425;
+      --gold:     #c9a84c;
+      --gold-lt:  #e2c06e;
+      --gold-dim: rgba(201,168,76,0.12);
+      --white:    #f0efe8;
+      --gray:     #8a8a99;
+      --border:   rgba(201,168,76,0.18);
+      --radius:   12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 6vw;
+      background: rgba(9,9,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: padding 0.3s;
+    }
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem; font-weight: 700; letter-spacing: 0.12em;
+      color: var(--gold); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--gray); text-decoration: none; font-size: 0.9rem;
+      letter-spacing: 0.04em; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      padding: 9px 22px;
+      background: transparent;
+      border: 1px solid var(--gold);
+      border-radius: 6px;
+      color: var(--gold);
+      font-size: 0.88rem; font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600; letter-spacing: 0.06em;
+      cursor: pointer; text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--bg); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 140px 6vw 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -20%; right: -10%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: -5%;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--gold); font-size: 0.78rem; letter-spacing: 0.1em;
+      text-transform: uppercase; font-weight: 500;
+      margin-bottom: 2rem;
+      width: fit-content;
+    }
+    .hero-tag::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold); animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
+    }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 5.2rem);
+      font-weight: 700; line-height: 1.08;
+      letter-spacing: -0.02em;
+      max-width: 820px;
+      margin-bottom: 1.5rem;
+    }
+    h1 span { color: var(--gold); }
+    .hero-sub {
+      color: var(--gray); font-size: clamp(1rem, 1.8vw, 1.2rem);
+      max-width: 560px; margin-bottom: 2.8rem; line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      padding: 14px 36px;
+      background: var(--gold);
+      border: none; border-radius: 8px;
+      color: #09090f; font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem; font-weight: 700; letter-spacing: 0.04em;
+      cursor: pointer; text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--gold-lt); transform: translateY(-1px); }
+    .btn-ghost {
+      padding: 14px 36px;
+      background: transparent;
+      border: 1px solid rgba(240,239,232,0.2);
+      border-radius: 8px;
+      color: var(--white); font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem; font-weight: 500; letter-spacing: 0.04em;
+      cursor: pointer; text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--white); }
+
+    .hero-scroll {
+      position: absolute; bottom: 40px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: var(--gray); font-size: 0.75rem; letter-spacing: 0.1em;
+    }
+    .hero-scroll span { animation: scrollDown 2s infinite; }
+    @keyframes scrollDown {
+      0%, 100% { transform: translateY(0); opacity: 0.5; }
+      50% { transform: translateY(6px); opacity: 1; }
+    }
+
+    /* ─── SECCIÓN BASE ─── */
+    section { padding: 100px 6vw; }
+    .section-tag {
+      display: inline-block;
+      color: var(--gold); font-size: 0.78rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      font-weight: 600; margin-bottom: 1rem;
+    }
+    h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 700; line-height: 1.15;
+      letter-spacing: -0.02em; margin-bottom: 1rem;
+    }
+    h2 span { color: var(--gold); }
+    .section-sub {
+      color: var(--gray); font-size: 1.05rem;
+      max-width: 540px; line-height: 1.7;
+    }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 0 6vw;
+    }
+
+    /* ─── MÉTRICAS ─── */
+    .metrics {
+      background: var(--bg2);
+      padding: 60px 6vw;
+    }
+    .metrics-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 2rem; max-width: 900px; margin: 0 auto; text-align: center;
+    }
+    .metric-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.8rem; font-weight: 700; color: var(--gold); line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .metric-label { color: var(--gray); font-size: 0.88rem; letter-spacing: 0.04em; }
+
+    /* ─── SERVICIOS ─── */
+    .services { background: var(--bg); }
+    .services-header { margin-bottom: 4rem; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .service-card {
+      padding: 2rem 2rem 2.2rem;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: border-color 0.3s, transform 0.3s, background 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--gold-dim), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .service-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .service-card:hover::before { opacity: 1; }
+    .service-icon {
+      width: 48px; height: 48px; margin-bottom: 1.4rem;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--gold-dim); border-radius: 10px;
+      font-size: 1.4rem;
+    }
+    .service-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem; font-weight: 600; margin-bottom: 0.7rem;
+    }
+    .service-card p { color: var(--gray); font-size: 0.92rem; line-height: 1.65; }
+    .service-tags {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1.2rem;
+    }
+    .service-tag {
+      padding: 3px 10px;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--gold); font-size: 0.72rem; letter-spacing: 0.06em;
+    }
+
+    /* ─── CÓMO TRABAJO ─── */
+    .process { background: var(--bg2); }
+    .process-header { margin-bottom: 4rem; }
+    .process-steps {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2px; position: relative;
+    }
+    .process-step {
+      padding: 2.5rem 2rem;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    .process-step:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+    .process-step:last-child  { border-radius: 0 var(--radius) var(--radius) 0; }
+    .step-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3.5rem; font-weight: 700;
+      color: var(--border); line-height: 1; margin-bottom: 1rem;
+    }
+    .process-step h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem; font-weight: 600; color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+    .process-step p { color: var(--gray); font-size: 0.91rem; line-height: 1.65; }
+
+    /* ─── ÁREAS ─── */
+    .areas { background: var(--bg); }
+    .areas-grid {
+      display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2.5rem;
+    }
+    .area-pill {
+      padding: 10px 20px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--white); font-size: 0.9rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .area-pill:hover { border-color: var(--gold); color: var(--gold); cursor: default; }
+    .area-pill.highlight { border-color: var(--gold); color: var(--gold); }
+
+    /* ─── SOBRE MÍ ─── */
+    .about { background: var(--bg3); }
+    .about-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+    }
+    .about-text h2 { margin-bottom: 1.2rem; }
+    .about-text p {
+      color: var(--gray); font-size: 1rem; line-height: 1.75;
+      margin-bottom: 1.2rem;
+    }
+    .about-text p:last-of-type { margin-bottom: 2rem; }
+    .about-values {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    }
+    .value-item {
+      padding: 1rem 1.2rem;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .value-item strong {
+      display: block; color: var(--gold);
+      font-family: 'Space Grotesk', sans-serif; font-size: 0.88rem;
+      font-weight: 600; letter-spacing: 0.04em; margin-bottom: 0.3rem;
+    }
+    .value-item span { color: var(--gray); font-size: 0.83rem; }
+    .about-visual {
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .about-card {
+      padding: 1.8rem;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .about-card-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem;
+    }
+    .about-card-text { color: var(--gray); font-size: 0.9rem; line-height: 1.6; }
+
+    /* ─── CTA ─── */
+    .cta-section {
+      background: var(--bg);
+      text-align: center; padding: 120px 6vw;
+      position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px; height: 400px;
+      background: radial-gradient(ellipse, rgba(201,168,76,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-section h2 { max-width: 640px; margin: 0 auto 1.2rem; }
+    .cta-section p { color: var(--gray); max-width: 480px; margin: 0 auto 2.5rem; font-size: 1.05rem; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 40px 6vw;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem; font-weight: 700; letter-spacing: 0.12em; color: var(--gold);
+    }
+    .footer-copy { color: var(--gray); font-size: 0.82rem; }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { color: var(--gray); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .process-step:first-child,
+      .process-step:last-child { border-radius: var(--radius); }
+      h1 { font-size: 2.4rem; }
+    }
+
+    /* ─── FADE IN ─── */
+    .fade-in {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">KODO</a>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#sobre-mi">Nosotros</a></li>
+  </ul>
+  <a href="https://wa.me/543416609490?text=Hola%2C%20me%20interesa%20saber%20m%C3%A1s%20sobre%20Kodo." target="_blank" rel="noopener noreferrer" class="nav-cta">Trabajemos juntos</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">Growth Partner</div>
+  <h1>Escalá tu empresa con<br /><span>orden, claridad</span><br />y resultados reales.</h1>
+  <p class="hero-sub">
+    Te acompaño a crecer con foco: optimizo tus procesos, integro tecnología
+    y te ayudo a tomar decisiones más inteligentes con datos claros.
+  </p>
+  <div class="hero-actions">
+    <a href="https://wa.me/543416609490?text=Hola%2C%20me%20interesa%20saber%20m%C3%A1s%20sobre%20Kodo." target="_blank" rel="noopener noreferrer" class="btn-primary">Hablemos de tu negocio</a>
+    <a href="#servicios" class="btn-ghost">Ver servicios</a>
+  </div>
+  <div class="hero-scroll">
+    <span>↓</span>
+  </div>
+</section>
+
+<!-- MÉTRICAS -->
+<div class="metrics">
+  <div class="metrics-grid">
+    <div class="fade-in">
+      <div class="metric-num">3x</div>
+      <div class="metric-label">Velocidad de ejecución</div>
+    </div>
+    <div class="fade-in">
+      <div class="metric-num">-40%</div>
+      <div class="metric-label">Costos operativos</div>
+    </div>
+    <div class="fade-in">
+      <div class="metric-num">100%</div>
+      <div class="metric-label">Foco en resultados</div>
+    </div>
+    <div class="fade-in">
+      <div class="metric-num">+ROI</div>
+      <div class="metric-label">Desde el día uno</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SERVICIOS -->
+<section class="services" id="servicios">
+  <div class="services-header fade-in">
+    <span class="section-tag">Servicios</span>
+    <h2>En qué puedo<br /><span>ayudar a tu empresa</span></h2>
+    <p class="section-sub">
+      Trabajo en las áreas que más impacto tienen en el crecimiento: operaciones, tecnología, datos y estrategia comercial.
+    </p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-in">
+      <div class="service-icon">⚙️</div>
+      <h3>Optimización de Procesos</h3>
+      <p>Mapeo, análisis y rediseño de los flujos operativos que frenan tu crecimiento. Más velocidad, menos fricción.</p>
+      <div class="service-tags">
+        <span class="service-tag">Stock</span>
+        <span class="service-tag">Logística</span>
+        <span class="service-tag">Ventas</span>
+        <span class="service-tag">Reporting</span>
+      </div>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-icon">🤖</div>
+      <h3>Automatización e IA</h3>
+      <p>Implemento herramientas y sistemas que hacen más con menos esfuerzo manual. Tu equipo se enfoca en lo que importa.</p>
+      <div class="service-tags">
+        <span class="service-tag">Automatización</span>
+        <span class="service-tag">Integraciones</span>
+        <span class="service-tag">IA Aplicada</span>
+      </div>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-icon">📊</div>
+      <h3>Decisiones Basadas en Datos</h3>
+      <p>Construyo dashboards y sistemas de métricas para que tomes decisiones rápidas con información clara y confiable.</p>
+      <div class="service-tags">
+        <span class="service-tag">KPIs</span>
+        <span class="service-tag">Dashboards</span>
+        <span class="service-tag">Analytics</span>
+      </div>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-icon">🚀</div>
+      <h3>Estrategia de Crecimiento</h3>
+      <p>Acompaño etapas de escala: desde ordenar la base operativa hasta definir los próximos pasos del negocio con claridad.</p>
+      <div class="service-tags">
+        <span class="service-tag">Escala</span>
+        <span class="service-tag">Estrategia</span>
+        <span class="service-tag">Comercial</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROCESO -->
+<section class="process" id="proceso">
+  <div class="process-header fade-in">
+    <span class="section-tag">Metodología</span>
+    <h2>Cómo <span>trabajo</span></h2>
+    <p class="section-sub">Un proceso claro, sin vueltas. Me integro al equipo y ejecuto junto a ustedes.</p>
+  </div>
+  <div class="process-steps">
+    <div class="process-step fade-in">
+      <div class="step-num">01</div>
+      <h3>Diagnóstico</h3>
+      <p>Analizo en profundidad tu operación, tus números y tus cuellos de botella. Sin suposiciones, con datos reales.</p>
+    </div>
+    <div class="process-step fade-in">
+      <div class="step-num">02</div>
+      <h3>Propuesta</h3>
+      <p>Diseño un plan concreto con prioridades claras, tiempos estimados e impacto esperado en cada iniciativa.</p>
+    </div>
+    <div class="process-step fade-in">
+      <div class="step-num">03</div>
+      <h3>Ejecución</h3>
+      <p>Implemento junto al equipo. No dejo un PowerPoint y me voy: me quedo hasta que los cambios funcionen.</p>
+    </div>
+    <div class="process-step fade-in">
+      <div class="step-num">04</div>
+      <h3>Resultados</h3>
+      <p>Medimos el impacto en métricas reales. El objetivo siempre es crecimiento sostenido y rentable.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ÁREAS -->
+<section class="areas">
+  <div class="fade-in">
+    <span class="section-tag">Industrias y áreas</span>
+    <h2>Experiencia en los<br /><span>procesos que más importan</span></h2>
+  </div>
+  <div class="areas-grid fade-in">
+    <div class="area-pill highlight">Gestión de stock</div>
+    <div class="area-pill highlight">Ventas y comercial</div>
+    <div class="area-pill highlight">Logística y distribución</div>
+    <div class="area-pill">Reporting y métricas</div>
+    <div class="area-pill">Onboarding de clientes</div>
+    <div class="area-pill">Operaciones internas</div>
+    <div class="area-pill">Tecnología e integraciones</div>
+    <div class="area-pill">Estrategia de precios</div>
+    <div class="area-pill">Equipos y liderazgo</div>
+    <div class="area-pill">Customer experience</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SOBRE MÍ -->
+<section class="about" id="sobre-mi">
+  <div class="about-inner">
+    <div class="about-text fade-in">
+      <span class="section-tag">Growth Partner</span>
+      <h2>No soy un consultor<br /><span>de PowerPoints</span></h2>
+      <p>
+        Soy consultor en eficiencia operativa y crecimiento estratégico. Trabajo como Growth Partner
+        junto a empresas que quieren escalar con orden, claridad y foco en resultados reales.
+      </p>
+      <p>
+        Mi enfoque combina experiencia comercial, visión de procesos y uso práctico de tecnología.
+        Analizo, propongo y ejecuto junto al equipo — sin recetas genéricas, con soluciones que funcionan en tu contexto.
+      </p>
+      <div class="about-values">
+        <div class="value-item">
+          <strong>Resultados reales</strong>
+          <span>Métricas que impactan en el negocio</span>
+        </div>
+        <div class="value-item">
+          <strong>Ejecución</strong>
+          <span>Me quedo hasta que funciona</span>
+        </div>
+        <div class="value-item">
+          <strong>Claridad</strong>
+          <span>Sin jerga, sin vueltas</span>
+        </div>
+        <div class="value-item">
+          <strong>Escala sostenida</strong>
+          <span>Crecimiento rentable y ordenado</span>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual fade-in">
+      <div class="about-card">
+        <div class="about-card-title">Mi diferencial</div>
+        <div class="about-card-text">
+          Combino la visión estratégica de un consultor con la ejecución de alguien que se mete en la operación.
+          No entrego un informe: construyo el cambio con vos.
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-title">Con quién trabajo</div>
+        <div class="about-card-text">
+          Dueños y equipos de empresas en etapas de crecimiento que necesitan orden, sistemas y claridad
+          para escalar sin perder rentabilidad.
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-title">Tecnología aplicada</div>
+        <div class="about-card-text">
+          No vendo herramientas. Uso la tecnología correcta para tu operación: desde automatizaciones simples
+          hasta sistemas integrados con IA.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contacto">
+  <div class="fade-in">
+    <span class="section-tag">Empezá hoy</span>
+    <h2>¿Tu empresa tiene<br /><span>potencial sin explotar?</span></h2>
+    <p>
+      Hablemos 30 minutos. Sin compromiso. Te cuento cómo puedo ayudarte a escalar con orden y resultados reales.
+    </p>
+    <a href="https://wa.me/543416609490?text=Hola%2C%20me%20interesa%20saber%20m%C3%A1s%20sobre%20Kodo." target="_blank" rel="noopener noreferrer" class="btn-primary">Agendá una llamada gratuita →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">KODO</div>
+  <div class="footer-copy">© 2025 KODO. Todos los derechos reservados.</div>
+  <div class="footer-links">
+    <a href="#servicios">Servicios</a>
+    <a href="#proceso">Proceso</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+</footer>
+
+<script>
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Nav shrink on scroll
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').style.padding =
+      window.scrollY > 60 ? '14px 6vw' : '20px 6vw';
+  });
+</script>
+</body>
+</html>
