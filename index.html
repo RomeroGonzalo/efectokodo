@@ -453,6 +453,7 @@
       font-family: var(--fh); font-size: 32px; font-weight: 900;
       border: 3px solid var(--bg);
     }
+    img.team-photo-inner { display: block; object-fit: cover; object-position: center top; }
     .tp-gr { background: linear-gradient(135deg,#00CC78,#5B8FF9); color:#fff; }
     .tp-mf { background: linear-gradient(135deg,#7C3AED,#EC4899); color:#fff; }
     .team-name { font-family: var(--fh); font-size: 22px; font-weight: 800; margin-bottom: 4px; }
@@ -983,9 +984,9 @@
     <div class="team-grid">
       <div class="team-card fade-up">
         <div class="team-photo-wrap">
-          <div class="team-photo-inner tp-gr">GR</div>
+          <img class="team-photo-inner" src="assets/gonzalo.jpg" alt="Gonzalo Romero" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="team-photo-inner tp-gr" style="display:none">GR</div>
         </div>
-        <p class="photo-note">[ Foto de Gonzalo ]</p>
         <div class="team-name">Gonzalo Romero</div>
         <div class="team-role">Co-Fundador &middot; Estrategia y Crecimiento</div>
         <p class="team-bio">
@@ -1000,19 +1001,19 @@
       </div>
       <div class="team-card fade-up d2">
         <div class="team-photo-wrap">
-          <div class="team-photo-inner tp-mf">MF</div>
+          <img class="team-photo-inner" src="assets/martin.jpg" alt="Martín Freggiaro" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="team-photo-inner tp-mf" style="display:none">MF</div>
         </div>
-        <p class="photo-note">[ Foto de Martín ]</p>
         <div class="team-name">Martín Freggiaro</div>
-        <div class="team-role">Co-Fundador &middot; Tecnología y Procesos</div>
+        <div class="team-role">Co-Fundador &middot; Liderazgo Comercial</div>
         <p class="team-bio">
-          Experto en implementación tecnológica y automatización de procesos críticos. Conecta la operación con las herramientas correctas — desde sistemas de gestión de stock y logística hasta reporting y CRM — para multiplicar resultados.
+          Especialista en liderazgo comercial e implementación de acciones de venta. Acompaña equipos comerciales en la adopción de CRM, define procesos de seguimiento y capacita a la fuerza de ventas para convertir más y escalar con estructura.
         </p>
         <div class="team-tags">
-          <span class="ttag">Tecnología</span>
-          <span class="ttag">Automatización</span>
-          <span class="ttag">Datos</span>
-          <span class="ttag">Sistemas</span>
+          <span class="ttag">Liderazgo Comercial</span>
+          <span class="ttag">CRM</span>
+          <span class="ttag">Ventas</span>
+          <span class="ttag">Capacitación</span>
         </div>
       </div>
     </div>
