@@ -307,6 +307,41 @@
     .vb-text strong { display: block; font-size: 13px; font-weight: 700; color: var(--text); font-family: var(--fh); }
     .vb-text span { font-size: 11px; color: var(--text2); }
 
+    /* ── PARTNERS ── */
+    #partners { padding: 56px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg2); }
+    .partners-inner { display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap; }
+    .partners-label {
+      font-family: var(--fh); font-size: 12px; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--text2); text-align: center;
+      max-width: 220px;
+    }
+    .partners-label strong { display: block; color: var(--text); font-size: 15px; margin-top: 4px; letter-spacing: -.01em; text-transform: none; font-weight: 800; }
+    .partner-logos { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; justify-content: center; }
+    .partner-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-a);
+      border-radius: var(--r-md);
+      padding: 18px 30px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 28px rgba(88,255,180,.08);
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+    }
+    .partner-card:hover { transform: translateY(-3px); box-shadow: 0 12px 36px var(--accent-glow); }
+    .partner-card img { height: 30px; width: auto; display: block; }
+    .partner-card .dux-logo { height: 26px; }
+    .partner-badge {
+      font-family: var(--fh); font-size: 10px; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: var(--accent); background: var(--accent-dim);
+      border: 1px solid var(--border-a); border-radius: var(--r-full);
+      padding: 3px 10px; margin-left: 12px; white-space: nowrap;
+    }
+    @media (max-width: 640px) {
+      .partners-inner { flex-direction: column; gap: 24px; }
+      .partner-card { padding: 14px 22px; }
+    }
+
     /* ── STATS ── */
     #stats { padding: 72px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); }
@@ -723,6 +758,27 @@
             <strong>Resultados en 90 días</strong>
             <span>Primeros impactos medibles</span>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="partners">
+  <div class="container">
+    <div class="partners-inner fade-up">
+      <div class="partners-label">
+        Nos respaldan
+        <strong>Implementadores &amp; Partners Oficiales</strong>
+      </div>
+      <div class="partner-logos">
+        <div class="partner-card">
+          <img src="assets/tiendanube-logo.svg" alt="Tienda Nube — Logo oficial">
+          <span class="partner-badge">Partner Oficial</span>
+        </div>
+        <div class="partner-card">
+          <img class="dux-logo" src="assets/dux-software-logo.png" alt="Dux Software — Logo oficial">
+          <span class="partner-badge">Implementador Oficial</span>
         </div>
       </div>
     </div>
